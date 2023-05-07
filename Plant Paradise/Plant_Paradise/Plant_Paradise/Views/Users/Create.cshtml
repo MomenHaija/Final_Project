@@ -1,0 +1,64 @@
+﻿@model Plant_Paradise.Models.AspNetUser
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<br />
+<br />
+<h4 style="color:red;text-align:center;">@ViewBag.Error</h4>
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="edit-product-form">
+    <h2>Add User</h2>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.LabelFor(model => model.Full_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Full_Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+    @Html.ValidationMessageFor(model => model.Full_Name, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.User_Image, htmlAttributes: new { @class = "control-label col-md-2" })
+    <input class="form-control text-box single-line" id="User_Image" name="User_Image" type="file" accept="image/*" required />
+    @Html.ValidationMessageFor(model => model.User_Image, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.Phone_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Phone_Number, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Phone_Number, "", new { @class = "text-danger" })
+
+
+
+    @Html.LabelFor(model => model.User_Address, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.User_Address, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+    @Html.ValidationMessageFor(model => model.User_Address, "", new { @class = "text-danger" })
+
+
+
+    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+     
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+
+        </div>
+    </div>
+</div>
+}
+
+<div>
+</div>
+<br />
+<br />
+<script>
+    var paragraph = document.getElementById("Users");
+    paragraph.classList.add("active");
+</script>

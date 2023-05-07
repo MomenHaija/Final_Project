@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CurrieTechnologies.Razor.SweetAlert2.props" />
+</Project>

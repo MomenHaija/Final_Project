@@ -1,0 +1,273 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Product>
+
+@{
+    Layout = "~/Views/Shared/UserLayout1.cshtml";
+
+}
+
+<style>
+    .breadcrumb-section {
+        background-image: url('../../images/indoorcart.jpg');
+    }
+</style>
+
+
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <h1>Cart</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- cart -->
+<div class="cart-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="cart-table-wrap">
+                    <table class="cart-table">
+                        <thead class="cart-table-head">
+                            <tr class="table-head-row">
+                                <th class="product-remove"></th>
+                                <th class="product-image">Product Image</th>
+                                <th class="product-name">Name</th>
+                                <th class="product-price">Unit Price</th>
+                                <th class="product-quantity">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{double totalprice = 0; }
+                            @foreach (var item in Model)
+                            {
+                                var productId = item.Product_id;
+                                var cartCookie = Request.Cookies["cart"].Value;
+                                var quantity = 0;
+
+                                if (cartCookie != null)
+                                {
+                                    var cartItems = cartCookie.Split('|');
+                                    for (var i = 0; i < cartItems.Length; i++)
+                                    {
+                                        var cartItem = cartItems[i].Split('_');
+                                        if (Convert.ToInt32(cartItem[0]) == productId)
+                                        {
+                                            quantity = Convert.ToInt32(cartItem[1]);
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                var minusBtnDisabled = quantity <= 1 ? "disabled" : "";
+                                double totalItem = Convert.ToDouble(item.Product_Price) * quantity;
+                                totalprice = totalprice + totalItem;
+
+                                <tr class="table-body-row">
+                                    <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
+                                    <td class="product-image"><img src="~/Images/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
+                                    <td class="product-name">@item.Product_Name</td>
+                                    <td class="product-price"><span id="price-@item.Product_id">@item.Product_Price</span> JD</td>
+                                    <td class="product-quantity">
+                                        <button class="quantity-btn minus btn-danger" data-product-id="@item.Product_id" data-cart-quantity="@quantity" @minusBtnDisabled>-</button>
+                                        <span type="number" class="quantity" id="quantity-@item.Product_id" data-product-id="@item.Product_id" data-cart-quantity="@quantity">@quantity</span>
+                                        <button onclick="update(@item.Product_id)" class="quantity-btn plus btn-success" data-product-id="@item.Product_id" data-cart-quantity="@quantity">+</button>
+                                    </td>
+
+                                 
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="total-section">
+                    <table class="total-table">
+                        <thead class="total-table-head">
+                            <tr class="table-total-row">
+                                <th>Total</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{double finalprice = totalprice; }
+                            <tr class="total-data">
+                                <td><strong>Subtotal: </strong></td>
+                                <td id="sub-total">@totalprice JD</td>
+                            </tr>
+
+
+                            <tr class="total-data">
+                                <td><strong>Shipping: </strong></td>
+                                <td>0JD</td>
+                            </tr>
+
+                            <tr class="total-data">
+                                <td><strong>Total: </strong></td>
+                                <td id="total-price">@finalprice JD</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    @if (Model.Count() > 0)
+                    {
+
+
+                          <div class="cart-buttons">
+                              @if (User.Identity.IsAuthenticated == true)
+                              {
+                                  <a href="/Transactions/Index" class="boxed-btn black" style="float:right">Check Out</a>
+                              }
+                              else
+                              {
+
+                                  <a onclick="PlaceOrder()" class="boxed-btn black" style="float:right">Check Out</a>
+
+                              }
+                          </div>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function PlaceOrder() {
+        Swal.fire({
+            title: 'To Make Order Must be logIn',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'LogIn',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                window.location.href = "/Transactions/Index"
+            }
+        })
+    }
+    // Access the cookie data and parse the quantities for each product
+    const cookieData = document.cookie;
+    const cookieItems = cookieData.split(';');
+    const productQuantities = {};
+
+    for (let i = 0; i < cookieItems.length; i++) {
+        const itemParts = cookieItems[i].split('=');
+        if (itemParts[0] === 'cart') {
+            const productData = itemParts[1].split('|');
+            for (let j = 0; j < productData.length; j++) {
+                const productParts = productData[j].split('_');
+                if (productParts.length === 2) {
+                    const productId = productParts[0];
+                    const quantity = parseInt(productParts[1]);
+                    productQuantities[productId] = quantity;
+                }
+            }
+            break;
+        }
+    }
+
+    // Add event listeners to the plus and minus buttons
+    var plusButtons = document.querySelectorAll('.plus');
+    var minusButtons = document.querySelectorAll('.minus');
+
+    for (var i = 0; i < plusButtons.length; i++) {
+        plusButtons[i].addEventListener('click', function () {
+            var productId = this.getAttribute('data-product-id');
+            var cartCookie = getCartCookie();
+            var cartItems = cartCookie.split('|');
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                if (item[0] === productId) {
+                    var currentQuantity = parseInt(item[1]);
+                    var newQuantity = currentQuantity + 1;
+                    item[1] = newQuantity.toString();
+                    cartItems[i] = item.join('_');
+                    break;
+                }
+            }
+            cartCookie = cartItems.join('|');
+            setCartCookie(cartCookie);
+            updateQuantityDisplay(productId, newQuantity);
+            updateTotalPrice();
+        });
+    }
+
+    for (var i = 0; i < minusButtons.length; i++) {
+        minusButtons[i].addEventListener('click', function () {
+            var productId = this.getAttribute('data-product-id');
+            var cartCookie = getCartCookie();
+            var cartItems = cartCookie.split('|');
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                if (item[0] === productId) {
+                    var currentQuantity = parseInt(item[1]);
+                    if (currentQuantity > 1) {
+                        var newQuantity = currentQuantity - 1;
+                        item[1] = newQuantity.toString();
+                        cartItems[i] = item.join('_');
+                        cartCookie = cartItems.join('|');
+                        setCartCookie(cartCookie);
+                        updateQuantityDisplay(productId, newQuantity);
+                        updateTotalPrice();
+                    }
+                    break;
+                }
+            }
+        });
+    }
+
+    function updateQuantityDisplay(productId, quantity) {
+        var quantitySpan = document.getElementById('quantity-' + productId);
+        if (quantitySpan) {
+            quantitySpan.innerHTML = quantity.toString();
+            quantitySpan.setAttribute('data-cart-quantity', quantity.toString());
+        }
+    }
+    function updateTotalPrice() {
+        var total = 0;
+        var cartCookie = document.cookie.match(/cart=([^;]*)/);
+        console.log(cartCookie);
+        if (cartCookie !== null) {
+            var cartItems = cartCookie[1].split('|');
+            console.log(cartItems);
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                var itemId = item[0];
+                var itemQuantity = parseInt(item[1]);
+                var quantityInput = document.getElementById('quantity-' + itemId);
+                var priceElement = document.getElementById('price-' + itemId);
+                var price = parseFloat(priceElement.textContent);
+                total += itemQuantity * price;
+                console.log(total);
+                quantityInput.textContent = itemQuantity;
+            }
+        }
+
+        document.getElementById('total-price').textContent = total.toFixed(2);
+        document.getElementById('sub-total').textContent = total.toFixed(2);
+
+    }
+    function getCartCookie() {
+        return document.cookie.replace(/(?:(?:^|.*;\s*)cart\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    }
+
+    function setCartCookie(value) {
+        var now = new Date();
+        var expiration = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+        document.cookie = 'cart=' + value + ';expires=' + expiration.toUTCString() + ';path=/';
+    }
+
+</script>
+

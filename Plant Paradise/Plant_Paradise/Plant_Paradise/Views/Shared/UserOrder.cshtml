@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Order>
+
+<div class="tab-pane fade" id="password" role="tabpanel">
+    <div class="card">
+
+        <div class="card mb-12">
+           
+            <div class="card-header">Revenues</div>
+            <!-- Billing history table-->
+            <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">Product Name</th>
+                            <th class="border-gray-200" scope="col">Product Image</th>
+                            <th class="border-gray-200" scope="col">Item that sold </th>
+                            <th class="border-gray-200" scope="col">Product Revenues</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                            <td>lemon Tree</td>
+                            <td><img src="assets/img/MeyerLemonTree.jfif" style="width: 60px;height: 60px;"></td>
+                            <td>29</td>
+                            <td>105JD</td>
+                        </tr>
+                        <tr>
+                            <td>lemon Tree</td>
+                            <td><img src="assets/img/MeyerLemonTree.jfif" style="width: 60px;height: 60px;"></td>
+                            <td>29</td>
+                            <td>105JD</td>
+                        </tr>
+                        <tr>
+                            <td>lemon Tree</td>
+                            <td><img src="assets/img/MeyerLemonTree.jfif" style="width: 60px;height: 60px;"></td>
+                            <td>29</td>
+                            <td>105JD</td>
+                        </tr>
+                        <tr>
+                            <td>lemon Tree</td>
+                            <td><img src="assets/img/MeyerLemonTree.jfif" style="width: 60px;height: 60px;"></td>
+                            <td>29</td>
+                            <td>105JD</td>
+                        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tab-pane fade" id="Notifications" role="tabpanel">
+    <div class="card">
+        <div class="card mb-12 ">
+
+            <div class="card-header">My Orders</div>
+            <!-- Billing history table-->
+
+            <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">Order Id</th>
+                            <th class="border-gray-200" scope="col">Order Date</th>
+                            <th class="border-gray-200" scope="col">Total price</th>
+                            <th class="border-gray-200" scope="col">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.Order_id</td>
+                            <td>@{
+                               var order_date= Convert.ToDateTime(item.Order_date).Date.ToString("yyyy-MM-dd");
+                               }
+                            @order_date
+                            </td>
+                            <td>@item.Total_price JD</td>
+
+                            <td>
+                                <a class="btn btn-success" href="\UserProfile\ProductsinOrders\@item.Order_id" style="color: white;">View Products</a>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

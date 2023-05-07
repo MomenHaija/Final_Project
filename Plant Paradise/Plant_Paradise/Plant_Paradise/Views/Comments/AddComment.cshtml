@@ -1,0 +1,46 @@
+﻿@model Plant_Paradise.Models.Comment
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<br />
+<br />
+<h4 style="color:red;text-align:center;">@ViewBag.Error</h4>
+@using (Html.BeginForm("AddComment", "Comments"))
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="edit-product-form">
+    <h2>Add Comment</h2>
+    @Html.LabelFor(model => model.Comment_text, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Comment_text, new { htmlAttributes = new { @class = "form-control" , @required = "required" } })
+    @Html.ValidationMessageFor(model => model.Comment_text, "", new { @class = "text-danger" })
+
+
+    @Html.LabelFor(model => model.Product_id, "Product_id", htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.DropDownList("Product_id", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+    @Html.ValidationMessageFor(model => model.Product_id, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+
+        </div>
+    </div>
+</div>
+}
+
+<div>
+</div>
+<br />
+<br />
+
+<script>
+    var paragraph = document.getElementById("Comments");
+    paragraph.classList.add("active");
+</script>

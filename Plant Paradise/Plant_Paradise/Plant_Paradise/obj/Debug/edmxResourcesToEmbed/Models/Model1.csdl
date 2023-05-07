@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PlantsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="User_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Full_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__userId__282DF8C2" FromRole="AspNetUsers" ToRole="cart" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__userId__1F98B2C1" FromRole="AspNetUsers" ToRole="Comments" />
+    <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedback__userId__4BAC3F29" FromRole="AspNetUsers" ToRole="Feedbacks" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__userId__3C34F16F" FromRole="AspNetUsers" ToRole="Orders" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__userI__43D61337" FromRole="AspNetUsers" ToRole="Transactions" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <NavigationProperty Name="Consulations" Relationship="PlantsModel.FK__Consulati__User___4F47C5E3" FromRole="AspNetUser" ToRole="Consulation" />
+    <Property Name="User_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="Cart_Id" />
+    </Key>
+    <Property Name="Cart_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__cart__userId__282DF8C2" FromRole="cart" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__cart__Product_id__2739D489" FromRole="cart" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_id" />
+    </Key>
+    <Property Name="Category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Category_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sub_Categories" Relationship="Self.FK__Sub_Categ__Categ__18EBB532" FromRole="Categories" ToRole="Sub_Categories" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Comment_id" />
+    </Key>
+    <Property Name="Comment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Product_id" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Comments__userId__1F98B2C1" FromRole="Comments" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Comments__Produc__208CD6FA" FromRole="Comments" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Feedback_id" />
+    </Key>
+    <Property Name="Feedback_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Feedback_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Feedback_Date" Type="DateTime" Precision="0" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsAccepted" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Feedback__userId__4BAC3F29" FromRole="Feedbacks" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Order_Details">
+    <Key>
+      <PropertyRef Name="OrderDetails" />
+    </Key>
+    <Property Name="OrderDetails" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order_Det__Order__3F115E1A" FromRole="Order_Details" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Order_Det__Produ__40058253" FromRole="Order_Details" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Order_id" />
+    </Key>
+    <Property Name="Order_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Order_date" Type="DateTime" Precision="0" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Orders__userId__3C34F16F" FromRole="Orders" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__Order__3F115E1A" FromRole="Orders" ToRole="Order_Details" />
+    <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Order__42E1EEFE" FromRole="Orders" ToRole="Transactions" />
+    <Property Name="Total_price" Type="Double" />
+    <NavigationProperty Name="Consulations" Relationship="PlantsModel.FK__Consulati__Order__503BEA1C" FromRole="Order" ToRole="Consulation" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Price" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Subcategory_id" Type="Int32" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__Product_id__2739D489" FromRole="Products" ToRole="cart" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__Produc__208CD6FA" FromRole="Products" ToRole="Comments" />
+    <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__Produ__40058253" FromRole="Products" ToRole="Order_Details" />
+    <NavigationProperty Name="Sub_Categories" Relationship="Self.FK__Products__Subcat__1CBC4616" FromRole="Products" ToRole="Sub_Categories" />
+    <Property Name="Water_needed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Sub_Categories">
+    <Key>
+      <PropertyRef Name="SubCategory_id" />
+    </Key>
+    <Property Name="SubCategory_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_id" Type="Int32" />
+    <Property Name="SubCategory_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Sub_Categ__Categ__18EBB532" FromRole="Sub_Categories" ToRole="Categories" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__Subcat__1CBC4616" FromRole="Sub_Categories" ToRole="Products" />
+    <Property Name="SubCategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SubCategoryImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="Order_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Contact" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="User_Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Transacti__userI__43D61337" FromRole="Transactions" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Transacti__Order__42E1EEFE" FromRole="Transactions" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__userId__282DF8C2">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comments__userId__1F98B2C1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__userId__4BAC3F29">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Feedbacks" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedbacks">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__userId__3C34F16F">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__userI__43D61337">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__Product_id__2739D489">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sub_Categ__Categ__18EBB532">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Sub_Categories" Type="Self.Sub_Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Category_id" />
+      </Principal>
+      <Dependent Role="Sub_Categories">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comments__Produc__208CD6FA">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_Det__Order__3F115E1A">
+    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_Det__Produ__40058253">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transacti__Order__42E1EEFE">
+    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Subcat__1CBC4616">
+    <End Role="Sub_Categories" Type="Self.Sub_Categories" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sub_Categories">
+        <PropertyRef Name="SubCategory_id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Subcategory_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="PlantsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+    <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Sub_Categories" EntityType="Self.Sub_Categories" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__userId__282DF8C2" Association="Self.FK__cart__userId__282DF8C2">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comments__userId__1F98B2C1" Association="Self.FK__Comments__userId__1F98B2C1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__userId__4BAC3F29" Association="Self.FK__Feedback__userId__4BAC3F29">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Feedbacks" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__userId__3C34F16F" Association="Self.FK__Orders__userId__3C34F16F">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__userI__43D61337" Association="Self.FK__Transacti__userI__43D61337">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__Product_id__2739D489" Association="Self.FK__cart__Product_id__2739D489">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sub_Categ__Categ__18EBB532" Association="Self.FK__Sub_Categ__Categ__18EBB532">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Sub_Categories" EntitySet="Sub_Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comments__Produc__208CD6FA" Association="Self.FK__Comments__Produc__208CD6FA">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_Det__Order__3F115E1A" Association="Self.FK__Order_Det__Order__3F115E1A">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_Det__Produ__40058253" Association="Self.FK__Order_Det__Produ__40058253">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transacti__Order__42E1EEFE" Association="Self.FK__Transacti__Order__42E1EEFE">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Subcat__1CBC4616" Association="Self.FK__Products__Subcat__1CBC4616">
+      <End Role="Sub_Categories" EntitySet="Sub_Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="Consulations" EntityType="PlantsModel.Consulation" />
+    <AssociationSet Name="FK__Consulati__User___4F47C5E3" Association="PlantsModel.FK__Consulati__User___4F47C5E3">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Consulation" EntitySet="Consulations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consulati__Order__503BEA1C" Association="PlantsModel.FK__Consulati__Order__503BEA1C">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Consulation" EntitySet="Consulations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Consulation">
+    <Key>
+      <PropertyRef Name="Consulation_Id" />
+    </Key>
+    <Property Name="Consulation_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Order_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="PlantsModel.FK__Consulati__User___4F47C5E3" FromRole="Consulation" ToRole="AspNetUser" />
+    <NavigationProperty Name="Order" Relationship="PlantsModel.FK__Consulati__Order__503BEA1C" FromRole="Consulation" ToRole="Order" />
+    <Property Name="Plant_status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Plant_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Consulati__User___4F47C5E3">
+    <End Type="PlantsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="PlantsModel.Consulation" Role="Consulation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consulation">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consulati__Order__503BEA1C">
+    <End Type="PlantsModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="PlantsModel.Consulation" Role="Consulation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Order_id" />
+      </Principal>
+      <Dependent Role="Consulation">
+        <PropertyRef Name="Order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

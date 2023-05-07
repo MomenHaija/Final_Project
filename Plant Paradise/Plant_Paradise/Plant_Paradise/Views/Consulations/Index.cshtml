@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Consulation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/UserLayout12.cshtml";
+}
+
+<<div class="list-section pt-80 pb-80 single-homepage-slider">
+    <section class="vh-100 single-homepage-slider " >
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-9">
+                    <style>
+                        .single-homepage-slider {
+                            background-color: white;
+                            background-image: url("../../images/GardeenPlants5555.jpg");
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                        }
+                        .vh-100 single-homepage-slider {
+                        }
+                    </style>
+                    
+
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body">
+
+
+
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+
+                                    <h6 class="mb-0">Order Number</h6>
+
+                                </div>
+                                <div class="col-md-9 pe-5">
+
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter The Number of Order" />
+
+                                </div>
+                            </div>
+
+             
+
+
+
+                            <hr class="mx-n3">
+
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+
+                                    <h6 class="mb-0">Status</h6>
+
+                                </div>
+                                <div class="col-md-9 pe-5">
+
+                                    <textarea class="form-control" rows="3" placeholder="Enter The Status Of The Plant"></textarea>
+
+                                </div>
+                            </div>
+
+                            <hr class="mx-n3">
+
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+
+                                    <h6 class="mb-0">Upload image</h6>
+
+                                </div>
+                                <div class="col-md-9 pe-5">
+
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file" />
+                                    <div class="small text-muted mt-2">
+                                        Upload Image for This Status
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr class="mx-n3">
+
+                            <div class="px-5 py-4">
+                                <input type="submit" class="btn btn-primary" value="Send Status">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

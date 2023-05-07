@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Transaction>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Orders</h1>
+    <small>Home / Orders</small>
+</div>
+<p>@TempData["ErrorinOrder"]</p>
+<div class="page-content">
+
+    <div class="records table-responsive">
+        @using (Html.BeginForm("search", "OrdersAdmin"))
+        {
+            <div class="record-header">
+                <div>
+                    <input type="radio" name="order" value="1">
+                    <label>Day Orders</label>
+
+                    <input type="radio" name="order" value="2">
+                    <label>All Orders</label>
+                </div>
+                <div class="add">
+
+                    <!-- <span>Entries</span>
+                    <select name="" id="">
+                        <option value="">ID</option>
+                    </select> -->
+                </div>
+
+                <div class="">
+                    <input type="search" placeholder="Search" name="Search" style="margin:0;height: 33px !important;">
+                    <input type="submit" width="10px" style="margin:0;" value="search" class="btn btn-info">
+                </div>
+            </div>
+        }
+        <div>
+            <table width="100%">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Order_id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Order.Order_date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Order.Total_price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AspNetUser.Full_Name)
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>Products</th>
+                    </tr>
+                <thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order.Order_date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Order.Total_price) JD
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AspNetUser.Full_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User_Location)
+                                </td>
+                                <td>
+
+                                    <a class="btn btn-success" href="/ViewProductFromAdmin/Index/@item.Order_id">View Products</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <text>Not found any order</text>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+<script>
+    var paragraph = document.getElementById("Orders");
+    paragraph.classList.add("active");
+</script>

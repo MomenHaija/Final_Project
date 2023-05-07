@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Product>
+
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Best</span> Sellers</h3>
+                    <p>To plant a garden is to believe in tomorrow</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            @{ 
+                Plant_Paradise.Models.PlantsEntities db = new Plant_Paradise.Models.PlantsEntities();
+            }
+            @foreach (var P in db.Products)
+            {
+            foreach (var item in Model)
+            {
+            if (P.Product_id == item.Product_id)
+            {
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a href="/Products/SingleProduct/@item.Product_id"><img src="~/Images/@P.Product_Image" alt="" style="width: 261px;height: 261px;"></a>
+                    </div>
+                    <h3>@item.Product_Name</h3>
+                    <p class="product-price">@item.Product_Price JD</p>
+                    <a href="/Products/Add_ToCart/@item.Product_id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                </div>
+            </div>
+              }
+             }
+            }
+        </div>
+    </div>
+</div>

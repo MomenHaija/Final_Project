@@ -1,0 +1,233 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+    <!-- title -->
+    <title>Plant Paradise</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- favicon -->
+    <!-- google font -->
+    <!-- fontawesome -->
+    <link href="~/Content/assets/css/all.min.css" rel="stylesheet" />
+    <!-- bootstrap -->
+    <link href="~/Content/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- owl carousel -->
+    <link href="~/Content/assets/css/owl.carousel.css" rel="stylesheet" />
+    <!-- magnific popup -->
+    <link href="~/Content/assets/css/magnific-popup.css" rel="stylesheet" />
+    <!-- animate css -->
+    <link href="~/Content/assets/css/animate.css" rel="stylesheet" />
+
+    <!-- mean menu css -->
+    <link href="~/Content/assets/css/meanmenu.min.css" rel="stylesheet" />
+
+    <!-- main style -->
+    <link href="~/Content/assets/css/main.css" rel="stylesheet" />
+    <!-- responsive -->
+    <link href="~/Content/assets/css/responsive.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="/Home/Index" style="color: #F28123;font-size: 22px;font-weight: bold;">
+                                Plant Paradise
+
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+
+                                <li><a href="/Home/Index">Home</a></li>
+
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a href="/UserProfile/Index">Profile</a></li>
+
+                                    <li>
+                                        <a class="shopping-cart" href="/CategoriesAdmin/Index">Dashboard</a>
+                                    </li>
+
+                                    <li><a href="/Home/About">About</a></li>
+                                    <li><a href="/Home/Contact">Contact</a></li>
+
+                                }
+                                else
+                                {
+
+                                    <li><a href="/Products/Index2">Shop</a></li>
+
+                                    if (User.Identity.IsAuthenticated == true)
+                                    {
+                                        <li><a href="/UserProfile/Index">Profile</a></li>
+
+                                    }
+
+
+
+
+
+                                    <li><a href="/Home/About">About</a></li>
+                                    <li><a href="/Home/Contact">Contact</a></li>
+                                    <li>
+                                        <div class="header-icons">
+                                            <a class="shopping-cart" href="/Products/ViewCart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                }
+                                <li>
+                                    @Html.Partial("_LoginPartial")
+
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+    <div class="logo-carousel-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="logo-carousel-inner">
+                        <div class="single-logo-item">
+                            <img src="~/Content/assets/img/DuPont-Logo.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="~/Content/assets/img/Nutrien_Logo_R_color.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="~/Content/assets/img/ADM-6404202d.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="~/Content/assets/img/Syngenta_logo.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="~/Content/assets/img/BASF-Symbol.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- end logo carousel -->
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">About us</h2>
+                        <p>Our website is a haven for plant lovers. We take pride in providing a wide selection of beautiful and unique trees, plants, and flowers that are sure to delight.</p>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-1"></div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-box pages">
+                            <h2 class="widget-title">Get in Touch</h2>
+                            <ul>
+                                <li>Jordan,Irbid,Sharqi District</li>
+                                <li>Plant Paradise@fruitkha.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-box pages">
+                            <h2 class="widget-title">Pages</h2>
+                            <ul>
+                                <li><a href="/Home/Index">Home</a></li>
+                                <li><a href="/Home/About">About</a></li>
+                                <li><a href="/Home/Contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-6">
+                        <div class="footer-box Pages">
+                            <h2 class="widget-title">social</h2>
+                            <ul>
+                                <li><a href="https://www.facebook.com/momen.abualhaija" target="_blank"><i style="font-size:2rem" class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://www.instagram.com/momen_abu_alhaija/" target="_blank"><i style="font-size:2rem" class="fab fa-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/momen_abu_alhaija/" target="_blank"><i style="font-size:2rem" class="fab fa-instagram"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+    <!-- end footer -->
+    <!-- copyright -->
+    <!-- end copyright -->
+    <!-- jquery -->
+    <script src="~/Content/assets/js/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/Content/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- count down -->
+    <script src="~/Content/assets/js/jquery.countdown.js"></script>
+    <!-- isotope -->
+    <script src="~/Content/assets/js/jquery.isotope-3.0.6.min.js"></script>
+    <!-- waypoints -->
+    <script src="~/Content/assets/js/waypoints.js"></script>
+    <!-- owl carousel -->
+    <script src="~/Content/assets/js/owl.carousel.min.js"></script>
+    <!-- magnific popup -->
+    <script src="~/Content/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- mean menu -->
+    <script src="~/Content/assets/js/jquery.meanmenu.min.js"></script>
+    <!-- sticker js -->
+    <script src="~/Content/assets/js/sticker.js"></script>
+    <!-- main js -->
+    <script src="~/Content/assets/js/main.js"></script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
+
+

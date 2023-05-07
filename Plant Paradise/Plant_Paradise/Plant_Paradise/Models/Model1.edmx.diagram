@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f04e422bab994745bedc6bea896a131b" Name="Diagram1" ZoomLevel="18">
+        <EntityTypeShape EntityType="PlantsModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.AspNetUser" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.cart" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Category" Width="1.5" PointX="1.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Comment" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Feedback" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Order_Details" Width="1.5" PointX="7.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Order" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Product" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Sub_Categories" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlantsModel.Transaction" Width="1.5" PointX="7.5" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="PlantsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__cart__userId__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Comments__userId__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Feedback__userId__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Orders__userId__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Transacti__userI__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__cart__Product_id__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Sub_Categ__Categ__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Comments__Produc__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Order_Det__Order__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Order_Det__Produ__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Transacti__Order__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.FK__Products__Subcat__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="PlantsModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PlantsModel.Consulation" Width="1.5" PointX="10.5" PointY="15" />
+        <AssociationConnector Association="PlantsModel.FK__Consulati__User___4F47C5E3" />
+        <AssociationConnector Association="PlantsModel.FK__Consulati__Order__503BEA1C" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

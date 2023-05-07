@@ -1,0 +1,57 @@
+﻿@model Plant_Paradise.Models.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<h3 style="color:red;text-align:center;">@TempData["ErrorWhenDeleteCategory"] </h3>
+<br /><br />
+<div>
+    <p style="width:47%;margin-left:auto;margin-right:auto;font-size:1.5rem;">
+        Delete
+
+    </p>
+    <p style="width:47%;margin-left:auto;margin-right:auto;font-size:1.75rem;color:red;">
+        Are you sure you want to delete this?
+
+    </p>
+</div>
+
+
+
+<div class="container-fluid d-flex align-items-center flex-column">
+    <div class="product-details">
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Category_Name)
+        </label>
+        <span id="product-category">
+            @Html.DisplayFor(model => model.Category_Name)
+        </span>
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Category_Image)
+
+        </label>
+        <span id="product-category">
+            <img src="~/Images/@Model.Category_Image" class="img-circle img" />
+
+        </span>
+        </div></div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div style="display:flex;width:50%; margin-left:auto;margin-right:auto;">
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> 
+                    @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-primary"})
+                </div>
+                </div>
+                }
+          
+<script>
+    var paragraph = document.getElementById("Categories");
+    paragraph.classList.add("active");
+</script>

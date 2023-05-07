@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Plant_Paradise.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Users</h1>
+    <small>Home / Users</small>
+</div>
+<p>
+    <h4 style="color:red;text-align:center;">@TempData["ErrorinUser"]</h4>
+</p>
+<div class="page-content">
+
+    <div class="records table-responsive">
+        @using(Html.BeginForm("search", "Users")){
+        <div class="record-header">
+
+            <div class="add">
+
+                <!-- <span>Entries</span>
+                <select name="" id="">
+                    <option value="">ID</option>
+                </select> -->
+            </div>
+
+            <div class="">
+                <input type="search" name="Search" placeholder="Search" style="margin:0;height: 33px !important;">
+                <input type="submit" width="10px" style="margin:0;" value="search" class="btn btn-info">
+            </div>
+        </div>
+        }
+        <div>
+            <table width="100%">
+                <thead>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User_Image)
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Full_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone_Number)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User_Address)
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count()>0)
+                    {
+                        foreach (var item in Model)
+                        {
+
+                        <tr>
+                            @if (item.User_Image != null)
+                            {
+                                <td>
+                                    <img src="../Images/@item.User_Image" width="100" height="100" class="img" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <img src="../Images/default_USerImage.jpg" width="100" height="100"  />
+
+                                </td>
+
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Full_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone_Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User_Address)
+                            </td>
+                          
+                            <td>
+                                <button onclick="deleteUser('@item.Id')" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                     }
+                    else
+                    {
+                        <text>Not Found the user Specific the Name</text>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var paragraph = document.getElementById("Users");
+    paragraph.classList.add("active");
+</script>
+    
+
+<script>
+
+    function deleteUser(id) {
+        console.log("OK");
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't To Delete The User!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                location.href = "/Users/Delete/?id=" + id;
+            }
+        })
+    }
+</script>

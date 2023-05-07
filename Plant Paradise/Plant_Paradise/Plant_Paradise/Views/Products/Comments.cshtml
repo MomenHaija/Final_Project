@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Comment>
+
+@if (Model.Count() == 0)
+{
+    <h4 style="text-align:c">Not there any Comment on this product</h4>
+}
+else
+{
+
+
+    <div class="row d-flex ">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body m-3">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row">
+                            <div class="col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
+                                @if (item.AspNetUser.User_Image != null)
+                                {
+                                    <img src="~/Images/@item.AspNetUser.User_Image"
+                                         class="rounded-circle img-fluid shadow-1" alt="woman avatar" width="100" height="100" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/default_USerImage.jpg"
+                                         class="rounded-circle img-fluid shadow-1" alt="woman avatar" width="50" height="50" />
+                                }
+                            </div>
+                            <div class="col-lg-8">
+
+                                <small class="fw-bold lead mb-2"><strong>@item.AspNetUser.Full_Name</strong></small>
+                                <p>
+                                    @item.Comment_text
+
+                                </p>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (item.AspNetUser.Id == ViewBag.userid)
+                                    {
+                                    <a id="@item.Comment_id" style="color:red" onclick="showAlert(@item.Product_id,@item.Comment_id)">Delete</a>
+                                    }
+                                }
+                               
+                            </div>
+
+
+                        </div>
+                        <hr />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function showAlert(productid, commentid) {
+
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't delete The Comment!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                );
+                // Perform the action here
+                window.location.href = '/Products/DeleteComment?productid=' + productid + '&commentid=' + commentid
+            }
+        });
+    }
+
+
+</script>

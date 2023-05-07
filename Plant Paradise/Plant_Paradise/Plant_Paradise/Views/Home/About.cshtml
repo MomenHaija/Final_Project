@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/UserLayout1.cshtml";
+
+}
+<script type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "cee80399-5665-4238-bc99-4bc4eb00eac6"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>We sale Green Plants</p>
+                    <h1>About Us</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end breadcrumb section -->
+<!-- featured section -->
+<div class="feature-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="featured-text">
+                    <h2 class="pb-3">Why <span class="orange-text">Plant Paradise</span></h2>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 mb-4 mb-md-5">
+                            <div class="list-box d-flex">
+                                <div class="list-icon">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <div class="content">
+                                    <h3>Home Delivery</h3>
+                                    <p>
+                                        Get your essentials delivered to your door with our home delivery service.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+                            <div class="list-box d-flex">
+                                <div class="list-icon">
+                                    <i class="fas fa-money-bill-alt"></i>
+                                </div>
+                                <div class="content">
+                                    <h3>Best Price</h3>
+                                    <p>Find the best prices on the products you need with our Best Price service.										</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+                            <div class="list-box d-flex">
+                                <div class="list-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="content">
+                                    <h3>packaging</h3>
+                                    <p>Our packaging service ensures your items arrive safely and securely.										</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="list-box d-flex">
+                                <div class="list-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="content">
+                                    <h3>
+                                        Consultation
+                                    </h3>
+                                    <p>Get expert advice and guidance with our Consultation service.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end featured section -->
+<!-- shop banner -->
+<section class="shop-banner">
+    <div class="container">
+        <h3>Discover a world  of <span class="orange-text">natural</span></h3>
+        <h3>beauty<span class="orange-text"> at our </span>website</h3>
+        <a href="/Products/Index2" class="cart-btn btn-lg">Shop Now</a>
+    </div>
+</section>
+<!-- end shop banner -->
+<!-- team section -->
+<div class="mt-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3>Our <span class="orange-text">Team</span></h3>
+                    <p>
+                        Our team is dedicated, experienced, and passionate about providing exceptional service to our customers.
+
+
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-item">
+                    <div class="team-bg team-bg-1" style="background-image:url(../../Images/MomenHaija.jpg)"></div>
+                    <h4>Ahmad Abu Alhaija <span>Farmer</span></h4>
+                    <ul class="social-link-team">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-item">
+                    <div class="team-bg team-bg-2" style="background-image: url(../../Images/Milkawi.jpg) "></div>
+                    <h4>Omar Milkawi<span>Farmer</span></h4>
+                    <ul class="social-link-team">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                <div class="single-team-item">
+                    <div class="team-bg team-bg-3"></div>
+                    <h4>Tareq Alzomor<span>Farmer</span></h4>
+                    <ul class="social-link-team">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end team section -->
+<!-- testimonail-section -->
+@Html.Action("feedbacks")

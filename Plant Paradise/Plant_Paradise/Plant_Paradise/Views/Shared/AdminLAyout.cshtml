@@ -1,0 +1,203 @@
+﻿
+@{
+    Layout = null;
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Plant Paradise</title>
+    <link href="~/Content/assets/Admin/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        @@import url('../../content/assets/bootstrap/css/bootstrap.css');
+
+        .description {
+            display: inline-block;
+            width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+            .description:hover {
+                width: 150px;
+                white-space: normal;
+                overflow: visible;
+            }
+
+        .img {
+            width: 100px;
+            height: 100px;
+            transition: all 0.3s ease-out; /* Add a transition effect */
+        }
+
+            /* When hovering over the image, increase its size */
+            .img:hover {
+                transform: scale(3);
+            }
+
+        .edit-product-form {
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+            .edit-product-form h2 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .edit-product-form label {
+                display: block;
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .edit-product-form input[type="text"],
+            .edit-product-form textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                margin-bottom: 20px;
+            }
+
+        .product-details {
+            display: grid;
+            grid-template-columns: repeat(2, 300px);
+            grid-gap: 9px;
+            font-size: 16px;
+        }
+
+            .product-details label {
+                font-weight: bold;
+            }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+            <h4 style="color:white;">Plant<span> Paradise</span></h4>
+        </div>
+
+            <div class="side-content">
+                <div class="profile">
+
+                    @{ 
+                        Plant_Paradise.Models.PlantsEntities db = new Plant_Paradise.Models.PlantsEntities();
+                        var user = db.AspNetUsers.Where(p => p.Email == "haijamomen4@gmail.com").FirstOrDefault();
+                    }
+                    <a href="/UserProfile/Index"><div class="profile-img bg-img" style="background-image: url(../../Images/@user.User_Image)"></div></a>
+                    <h6 style="color:white;">@user.Full_Name</h6>
+                    <small>Developer</small>
+                </div>
+
+                <div class="side-menu">
+                    <ul>
+                        <li>
+                            <a id="Dashboard" href="/CategoriesAdmin/Statistics">
+                                <span class="las la-chart-pie"></span>
+                                <small>Dashboard</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="Categories" href="/CategoriesAdmin/Index">
+                                <span class="las la-cubes"></span>
+                                <small>Categories</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="Products" href="/ProductsViewAdmin/Index">
+                                <span class="las la-tree"></span>
+                                <small>Products</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="Users" href="/Users/Index">
+                                <span class="las la-user-alt"></span>
+                                <small>Users</small>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a id="Orders" href="/OrdersAdmin/Index">
+                                <span class="las la-shopping-cart"></span>
+                                <small>Orders</small>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="Feedback" href="/FeedbacksAdmin/Index">
+                                <span class="las la-comment"></span>
+                                <small>Feedback</small>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="Comments" href="/Comments/Index">
+                                <span class="las la-comment-alt"></span>
+                                <small>Comments</small>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+    </div>
+
+    <div class="main-content">
+
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+
+                <div class="header-menu">
+
+
+                    <div class="user">
+                        <div class="bg-img" ></div>
+
+                        <span class="las la-power-off"></span>
+
+
+                        @Html.Partial("_LoginPartial")
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            @RenderBody()
+        </main>
+
+    </div>
+</body>
+
+</html>
+@RenderSection("Active", false)

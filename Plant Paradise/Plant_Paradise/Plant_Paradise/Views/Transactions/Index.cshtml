@@ -1,0 +1,182 @@
+﻿@model  Plant_Paradise.Models.AspNetUser
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/UserLayout12.cshtml";
+}
+
+
+
+<div class="checkout-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8" />
+                <div class="checkout-accordion-wrap">
+                    <div class="accordion" id="accordionExample">
+                        <h3 style="text-align:center;color:red;">@TempData["OrderEmpty"]</h3>
+                        <h3 style="text-align:center;color:green;">@TempData["CorrectProcess"]</h3>
+                        <h3 style="text-align:center;color:red;">@TempData["ErrorinEmail"]</h3>
+                        
+                        <div class="card single-accordion">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                        Card Details
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="card-details">
+                                        <div id="smart-button-container">
+                                            <div style="text-align: center;">
+                                                <div id="paypal-button-container"></div>
+                                            </div>
+                                        </div>
+                                        <script src="https://www.paypal.com/sdk/js?client-id=AYOPFmJHKEp34Obn8Gp5EJhzo8qOotnJl2Y6lj3E72wh3UcV-V-gVaGPkM-bR-XvEfuvN5ZhSeOgZk6R&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+                                        <script>
+                                            function initPayPalButton() {
+                                                paypal.Buttons({
+                                                    style: {
+                                                        shape: 'rect',
+                                                        color: 'black',
+                                                        layout: 'vertical',
+                                                        label: 'paypal',
+
+                                                    },
+
+                                                    createOrder: function (data, actions) {
+                                                        return actions.order.create({
+
+                                                            purchase_units: [{ "amount": { "currency_code": "USD", "value":@ViewBag.TotalPriceinUSD  } }]
+                                                        });
+                                                    },
+
+                                                    onApprove: function (data, actions) {
+                                                        return actions.order.capture().then(function (orderData) {
+
+                                                            // Full available details
+                                                            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                                                            // Show a success message within this page, e.g.
+                                                            const element = document.getElementById('paypal-button-container');
+                                                            element.innerHTML = '';
+                                                            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+                                                            // Or go to another URL:  actions.redirect('thank_you.html');
+
+                                                        });
+                                                    },
+
+                                                    onError: function (err) {
+                                                        console.log(err);
+                                                    }
+                                                }).render('#paypal-button-container');
+                                            }
+                                            initPayPalButton();
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card single-accordion">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Billing Address
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="billing-address-form">
+
+                                        @using (Html.BeginForm("MakeOrder", "Transactions"))
+                                        {
+                                            <p><input type="email" name="Email" placeholder="Email" value="@Model.Email"></p>
+                                            <p><input type="text" name="Address" placeholder="Address" value="@Model.User_Address"></p>
+                                            <p><input type="tel" name="phone" placeholder="Phone" value="@Model.Phone_Number"></p>
+                                            <p><textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
+                                            <p style="width:25%;">
+                                                <input type="submit" class="boxed-btn" value="Place Order">
+
+                                            </p>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="order-details-wrap">
+                    <table class="order-details" style="margin-bottom:5%;">
+                        <thead>
+
+                            <tr>
+                                <th>Your order Details</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-details-body">
+                         
+
+
+                        </tbody>
+                        <tbody class="checkout-details">
+                            @if(Request.Cookies["cart"] !=null)
+                            {
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td>@ViewBag.TotalPrice JD</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td> 0 JD</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>@ViewBag.TotalPrice JD</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td>0 JD</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td> 0 JD</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>0 JD</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+                                            
+    </div>
+<br />
+<br />
+<br />
+<br />
+
+
+<script>
+</script>

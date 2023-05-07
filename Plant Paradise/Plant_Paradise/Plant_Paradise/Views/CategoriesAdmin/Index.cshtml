@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Categories</h1>
+    <small>Home / Categories</small>
+</div>
+
+<div class="page-content">
+    <h2 style="text-align:center;color:red;">@TempData["Errorincategory"]</h2>
+
+    <div class="records table-responsive">
+        @using (Html.BeginForm("search", "CategoriesAdmin"))
+        {
+            <div class="record-header">
+                <div class="add">
+                    @Html.ActionLink("ِAdd Category", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+
+                <div class="">
+                    <input type="search" placeholder="search" name="search" style="margin:0;height: 33px !important;">
+                    <input type="submit" style="margin:0;" value="search" class="btn btn-info">
+                </div>
+            </div>
+        }
+        <div>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category_Image)
+                        </th>
+                        <th>
+                            Subcategories
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category_Name)
+                                </td>
+                                <td>
+                                    <img src="~/Images/@item.Category_Image" class="img" />
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="/Sub_CategoriesAdmin/Index/@item.Category_id">View Subcategories</a>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Category_id }, new { @class = "btn btn-success" })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Category_id }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <text>Not Found the specified Category</text>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script>
+    var paragraph = document.getElementById("Categories");
+    paragraph.classList.add("active");
+</script>

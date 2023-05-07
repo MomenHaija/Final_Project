@@ -1,0 +1,112 @@
+﻿@model Plant_Paradise.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+
+<h4 style="color:red;text-align:center;">@TempData["ErrorWhenDelteProduct"]</h4>
+<div>
+    <p style="width:47%;margin-left:auto;margin-right:auto;font-size:1.5rem;">
+        Delete
+
+    </p>
+    <p style="width:47%;margin-left:auto;margin-right:auto;font-size:1.75rem;">
+        Are you sure you want to delete this?
+
+    </p>
+</div>
+
+
+
+<div class="container-fluid d-flex align-items-center flex-column">
+    <div class="product-details">
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Product_Image)
+        </label>
+        <span id="product-category">
+            <img src="~/Images/@Model.Product_Image" class="img" />
+        </span>
+        <label for="product-name">
+            @Html.DisplayNameFor(model => model.Product_Name)
+        </label>
+        <span id="product-name">
+            @Html.DisplayFor(model => model.Product_Name)
+        </span>
+
+        <label for="product-name">
+            @Html.DisplayNameFor(model => model.Subcategory_id)
+        </label>
+        <span id="product-name">
+            @Html.DisplayFor(model => model.Sub_Categories.SubCategoryName)
+        </span>
+
+
+
+        <label for="product-price">
+            @Html.DisplayNameFor(model => model.Product_Size)
+        </label>
+        <span id="product-price">
+            @Html.DisplayFor(model => model.Product_Size)
+        </span>
+
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Product_Color)
+        </label>
+        <span id="product-category">
+            @Html.DisplayFor(model => model.Product_Color)
+        </span>
+
+
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Product_Price)
+        </label>
+        <span id="product-category">
+            @Html.DisplayFor(model => model.Product_Price) JD
+        </span>
+
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </label>
+        <span id="product-category">
+            @Html.DisplayFor(model => model.Quantity)
+        </span>
+
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Product_Description)
+        </label>
+        <span id="product-category">
+            @Html.DisplayFor(model => model.Product_Description)
+        </span>
+
+
+
+    </div>
+
+</div>
+<br />
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div style="display:flex;width:50%; margin-left:auto;margin-right:auto;">
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+}
+<br />
+<script>
+    var paragraph = document.getElementById("Products");
+    paragraph.classList.add("active");
+</script>
+

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Products</h1>
+    <small>Home / Products</small>
+</div>
+<h4 style="color:red;text-align:center;">@TempData["ErrorinProduct"]</h4>
+<div class="page-content">
+
+    <div class="records table-responsive">
+        @using (Html.BeginForm("search", "ProductsViewAdmin"))
+        {
+            <div class="record-header">
+                <div class="add">
+
+                    <p>
+                        @Html.ActionLink("Add Product", "Create", null, new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+
+                <div>
+
+                    @{
+                        Plant_Paradise.Models.PlantsEntities db = new Plant_Paradise.Models.PlantsEntities();
+                        var cat = db.Categories;
+                    }
+                    @foreach (var item in cat)
+                    {
+                        <input type="radio" name="plants" value="@item.Category_id" />
+                        <label>@item.Category_Name</label>
+                    }
+                </div>
+
+                <div class="">
+                    <input type="search" name="search" placeholder="search by product Name" style="margin:0;height: 33px !important;">
+                    <input type="submit" width="10" style="margin:0;" value="search" class="btn btn-info">
+                </div>
+
+            </div>
+        }
+        <div>
+            <table width="100%" >
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Image)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Size)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Price)
+                        </th>
+                       
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>*@
+                      
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sub_Categories.SubCategoryName)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Name)
+                            </td>
+                            <td>
+                                <img src="~/Images/@item.Product_Image" class="img" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Size)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Price) JD
+                            </td>
+                          
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>*@
+                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sub_Categories.SubCategoryName)
+                            </td>
+                            <td >
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Product_id }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Details", "Details", new { id = item.Product_id }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Product_id }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+<script>
+    var paragraph = document.getElementById("Products");
+    paragraph.classList.add("active");
+</script>

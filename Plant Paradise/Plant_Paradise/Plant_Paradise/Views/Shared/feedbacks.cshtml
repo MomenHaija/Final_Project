@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Feedback>
+
+<div class="testimonail-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center">
+                <div class="testimonial-sliders">
+                    @foreach (var item in Model)
+                    {
+
+
+                            <div class="single-testimonial-slider">
+                                <div class="client-avater">
+                                    @if (item.AspNetUser.User_Image != null)
+                                    {
+                                        <img src="~/Images/@item.AspNetUser.User_Image" alt="@item.AspNetUser.Full_Name image">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/default_USerImage.jpg" alt="@item.AspNetUser.Full_Name default Image">
+                                    }
+                                </div>
+                                <div class="client-meta">
+                                    <h3>@item.AspNetUser.Full_Name</h3>
+                                    <p class="testimonial-body">
+                                        @item.Feedback_text
+                                    </p>
+                                    <div class="last-icon">
+                                        <i class="fas fa-quote-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    }
+
+                </div>
+            </div>
+        </div>
+        <a href="\Feedbacks\Index" class="boxed-btn mt-4">Add feedback</a>
+
+    </div>
+</div>

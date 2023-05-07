@@ -1,0 +1,154 @@
+﻿@model Plant_Paradise.Models.Product
+
+@{
+    ViewBag.Title = "SingleProduct";
+    Layout = "~/Views/Shared/UserLayout12.cshtml";
+}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" />
+<link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    .card {
+        border: none !important;
+    }
+
+    .commentbtn {
+        background-color: #F28123;
+        color: #051922;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 15px;
+        border: none !important;
+        cursor: pointer;
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+
+    #parentbutton {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .addComment {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+</style>
+
+
+<div class="single-product mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-md-5">
+                    <div class="single-product-img">
+                        <img src="~/Images/@Model.Product_Image" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="single-product-content">
+                        <h3>@Model.Product_Name</h3>
+                        <h2><span>Price: <span style="color:orange">@Model.Product_Price JD</span></h2>
+                        <p>Boncellensis Secullant is a stunning and unique succulent plant with cylindrical stems that grow upright, resembling little columns. It features small, green leaves that grow in a spiral pattern around the stems, and produces delicate pink flowers in the spring. This plant is low-maintenance and perfect for indoor or outdoor settings, making it a great choice for anyone looking to add a touch of natural beauty to their home or garden.</p>
+                        @if (Model.Sub_Categories.Category_id == 1 || Model.Sub_Categories.Category_id == 2)
+                        {
+
+                            <h3>Watering</h3>
+                            <p>@Model.Water_needed</p>
+
+                        }
+                        <h4>Size:@Model.Product_Size</h4>
+                        <div class="single-product-form">
+                            <p><strong>Category:</strong>@Model.Sub_Categories.SubCategoryName</p>
+
+                            <form method="post" Asp-action="Add_ToCart">
+                                <input type="hidden" name="id" value="@Model.Product_id" />
+                                @*<div>
+                                    <label for="quantity">Quantity:</label>
+                                    <input   id="quantity" name="quantity"   required />
+                                </div>*@
+
+                                <div class="cart-buttons">
+                                    <input type="submit" onclick="shoowalert(@Model.Product_id)"  value="Add to Cart" class="boxed-btn black" id="buttonupdate" style="font-family: 'Poppins', sans-serif !important; display: inline-block !important; padding: 10px 20px !important;" />
+                                    <a onclick="showCommnets()" class="boxed-btn black" style="font-family: 'Poppins', sans-serif !important; display: inline-block !important; padding: 10px 20px !important; font-weight: 700;">View Comments</a>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+<!-- end single product -->
+
+
+<div class="site-section" style="display: none;" id="comments">
+    <div class="container">
+
+
+
+
+        @Html.Action("Comments")
+
+        <div class="comment-form-wrap ">
+            @if (User.Identity.IsAuthenticated == true)
+            {
+                using (Html.BeginForm("addcomment", "Products"))
+                {
+                    <input type="hidden" name="product_id" value="@Model.Product_id" />
+                    <div class="addComment">
+                        <textarea name="Comment_text" id="message" cols="5" rows="2" class="form-control" required></textarea>
+                        <input style="margin-left:5%" type="submit" value="Post comment" class="btn btn-primary btn-md text-white">
+                    </div>
+                }
+            }
+
+        </div>
+        <br />
+    </div>
+
+</div>
+
+
+
+<script>
+    function showCommnets() {
+        var div = document.getElementById("comments");
+        div.style.display = "block";
+    }
+    function shoowalert(id) {
+        alert("The product has been added to cart successfully");
+        call(id);
+    }
+
+    function call(id) {
+        var r = document.getElementById("quantity").innerText;
+        window.location.href = '/Products/AddToCart_withQuntity/?id=' + id + '&q=' + r;
+
+}
+    function AddComment() {
+        Swal.fire({
+            title: 'To Add Comment Must be logIn',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'LogIn',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                window.location.href = "/Products/addcomment"
+            }
+        })
+    }
+
+
+</script>
+

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Sub_Categories>
+
+@{
+    ViewBag.Title = "SubCategory";
+    Layout = "~/Views/Shared/UserLayout12.cshtml";
+}
+
+<div class="product-section mt-150 mb-150">
+    <h2 style="text-align:center">@ViewBag.BageName </h2>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-filters">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row product-lists">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 text-center strawberry">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="\Products\Index\@item.SubCategory_id"><img src="~/Images/@item.SubCategoryImage" alt="" style="width:261px;height:336.76px;"></a>
+                        </div>
+                        <h3>@item.SubCategoryName</h3>
+                        <a href="\Products\Index\@item.SubCategory_id" class="cart-btn">View All Products</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+</div>

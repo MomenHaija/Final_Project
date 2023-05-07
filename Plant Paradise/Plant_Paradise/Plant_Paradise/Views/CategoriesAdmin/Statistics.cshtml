@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Order>
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+
+<div class="page-header">
+    <h1>Dashboard</h1>
+    <small>Home / Dashboard</small>
+</div>
+
+<div class="page-content">
+
+    <div class="analytics">
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Countuser</h2>
+                <span class="las la-user-friends"></span>
+            </div>
+            <div class="card-progress">
+                <small>Users</small>
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Countfeedback</h2>
+                <span class="las la-comment"></span>
+            </div>
+            <div class="card-progress">
+                <small>feedbacks</small>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Countproduct</h2>
+                <span class="lab la-pagelines">
+
+
+                </span>
+            </div>
+            <div class="card-progress">
+                <small>Number of Products</small>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.TotalRevenue JD</h2>
+                <span class="las la-dollar-sign">
+
+                </span>
+            </div>
+            <div class="card-progress">
+                <small>Total Revenues</small>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<div class="page-content">
+
+    <div class="analytics">
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Totalorders</h2>
+                <span class="las la-stream"></span>
+
+            </div>
+            <div class="card-progress">
+                <small>Total Orders</small>
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.dayorders</h2>
+                <span class="las la-briefcase"></span>
+            </div>
+            <div class="card-progress">
+                <small>day Orders</small>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Totalcomments</h2>
+                <span class="las la-comment-alt">
+
+
+                </span>
+            </div>
+            <div class="card-progress">
+                <small>Comments</small>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>@ViewBag.Dayrevenues JD</h2>
+                <span class="las la-donate">
+                </span>
+            </div>
+            <div class="card-progress">
+                <small>
+                    day Revenues
+                </small>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+<div class="chartCard">
+    <div class="chartBox">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+
+<script>
+    var paragraph = document.getElementById("Dashboard");
+    paragraph.classList.add("active");
+</script>

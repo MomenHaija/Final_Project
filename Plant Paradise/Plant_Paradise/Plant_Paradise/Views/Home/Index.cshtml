@@ -1,0 +1,275 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Category>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/UserLayout1.cshtml";
+}
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/UserLayout1.cshtml";
+}
+<script type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "cee80399-5665-4238-bc99-4bc4eb00eac6"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+
+<!-- home page slider -->
+<div class="homepage-slider">
+    <!-- single home slider -->
+    <div class="single-homepage-slider homepage-bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">Plants For Interior</p>
+                            <h1>
+                                Bring Freshness To Your Architecture
+                            </h1>
+                            <div class="hero-btns">
+                                <a href="/Products/Index2" class="boxed-btn">Plants Collection</a>
+                                <a href="/Home/Contact" class="bordered-btn">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- single home slider -->
+    <div class="single-homepage-slider homepage-bg-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 text-center">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">Plant Care Guide </p>
+                            <h1>
+                                The Plants Make Us Happier
+                            </h1>
+                            <div class="hero-btns">
+                                <a href="/Products/Index2" class="boxed-btn">Visit Shop</a>
+                                <a href="/Home/Contact" class="bordered-btn">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- single home slider -->
+    <div class="single-homepage-slider homepage-bg-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 text-right">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">Indoor Plants</p>
+                            <h1>
+                                A Link Between The Farmer And the Buyer
+                            </h1>
+                            <div class="hero-btns">
+                                <a href="/Products/Index2" class="boxed-btn">Visit Shop</a>
+                                <a href="/Home/Contact" class="bordered-btn">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end home page slider -->
+<!-- features list section -->
+<div class="list-section pt-80 pb-80">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="list-box d-flex align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="content">
+                        <h3>Free Delivery</h3>
+                        <p>Get Free Delivery</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="list-box d-flex align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                    <div class="content">
+                        <h3>24/7 Support</h3>
+                        <p>Get support all day</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="list-box d-flex justify-content-start align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <div class="content">
+                        <h3>Consultation</h3>
+                        <p>Get a free consultation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end features list section -->
+<!-- product section -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Our</span> Categories</h3>
+                    <p>To plant a garden is to believe in tomorrow</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 text-center">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="\Home\SubCategory\@item.Category_id"><img src="~/Images/@item.Category_Image" alt="" style="width:210px;height:207px"></a>
+                        </div>
+                        <h3>@item.Category_Name</h3>
+
+                        <a href="\Home\SubCategory\@item.Category_id" class="cart-btn">View</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Best</span> Sellers</h3>
+                    <p>To plant a garden is to believe in tomorrow</p>
+                </div>
+            </div>
+        </div>
+        @{
+            Plant_Paradise.Models.PlantsEntities db = new Plant_Paradise.Models.PlantsEntities();
+            var products = (from p in db.Products
+                            join o in db.Order_Details on p.Product_id equals o.Product_id
+                            group p by new { p.Product_id, p.Product_Name, p.Product_Price } into g
+                            orderby g.Count() descending
+                            select new
+                            {
+                                Product_id = g.Key.Product_id,
+                                Product_Name = g.Key.Product_Name,
+                                Product_Price = g.Key.Product_Price,
+
+                                Count = g.Count()
+                            }).Take(3).ToList();
+
+
+
+        }
+        <div class="row">
+
+            @foreach (var P in db.Products)
+            {
+                foreach (var item in products)
+                {
+                    if (P.Product_id == item.Product_id)
+                    {
+                        <div class="col-lg-4 col-md-6 text-center">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="/Products/SingleProduct/@item.Product_id"><img src="~/Images/@P.Product_Image" alt="" style="width: 261px;height: 261px;"></a>
+                                </div>
+                                <h3>@item.Product_Name</h3>
+                                <p class="product-price">@item.Product_Price JD</p>
+                                <a onclick="shoowalert(@item.Product_id)" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<!-- end product section -->
+<!-- cart banner section -->
+<!-- end cart banner section -->
+
+<section class="shop-banner">
+    <div class="container">
+        <h3>Discover a world  of <span class="orange-text">natural</span></h3>
+        <h3>beauty<span class="orange-text"> at our </span>website</h3>
+        <a href="/Products/Index2" class="cart-btn btn-lg">Shop Now</a>
+
+
+    </div>
+</section>
+
+
+
+<!-- testimonail-section -->
+
+@{
+    Plant_Paradise.Models.PlantsEntities plants = new Plant_Paradise.Models.PlantsEntities();
+    var feeback = plants.Feedbacks.ToList();
+}
+<!-- en
+<!-- en-->
+
+@Html.Action("feedbacks");
+
+
+<!-- end testimonail-section -->
+<!-- advertisement section -->
+<div class="abt-section mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="abt-bg">
+                    <a href="https://www.youtube.com/watch?v=yCOKZXnVhpw" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="abt-text">
+                    <h2>ِAbout<span class="orange-text"> Plant Paradise</span></h2>
+                    <p>Our website is the perfect place to find a wide variety of trees, plants, and flowers. We specialize in providing high-quality and sustainably grown plants to our customers. Our selection includes everything from beautiful flowering plants to hardy trees and shrubs. We take great care in selecting and shipping our plants to ensure they arrive at your doorstep in perfect condition.</p>
+                    <p>
+
+                        We work hard with farmers to  offer a wide selection of trees, plants, and flowers that will bring life and beauty to Your space.
+                    </p>
+                    <a href="/Home/About" class="boxed-btn mt-4">know more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function shoowalert(id) {
+        alert("The product has been added to cart successfully");
+        call(id);
+    }
+
+    function call(id) {
+        window.location.href = '/Products/Add_ToCart/?id=' + id + '&ReturnUrl=/Home';
+    }
+</script>
+
+
+
+
+
+

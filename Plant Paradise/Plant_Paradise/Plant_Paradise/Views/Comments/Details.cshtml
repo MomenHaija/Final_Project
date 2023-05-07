@@ -1,0 +1,73 @@
+﻿@model Plant_Paradise.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLAyout.cshtml";
+}
+
+<
+<br />
+<br />
+
+<div>
+    <p style="width:47%;margin-left:auto;margin-right:auto;font-size:2.5rem;">
+        Details
+    </p>
+</div>
+
+
+
+<div class="container-fluid d-flex align-items-center flex-column">
+
+
+    <div class="product-details">
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Comment_text)
+        </label>
+
+        <span id="product-name">
+            @Html.DisplayFor(model => model.Comment_text)
+        </span>
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.AspNetUser.User_Image)
+        </label>
+
+        <span id="product-name">
+            <img src="~/Images/@Model.AspNetUser.User_Image" width="100" height="100" class="img" />
+        </span>
+
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.AspNetUser.Full_Name)
+        </label>
+
+        <span id="product-name">
+            @Html.DisplayFor(model => model.AspNetUser.Full_Name)
+        </span>
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </label>
+
+        <span id="product-name">
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </span>
+        <label for="product-category">
+            @Html.DisplayNameFor(model => model.Product.Product_Name)
+        </label>
+
+        <span id="product-name">
+            @Html.DisplayFor(model => model.Product.Product_Name)
+        </span>
+    </div>
+
+</div>
+<div style="display:flex">
+    <p style="width:50%;margin-left:auto;margin-right:auto;">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+</div>
+<script>
+    var paragraph = document.getElementById("Comments");
+    paragraph.classList.add("active");
+</script>

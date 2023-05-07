@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Plant_Paradise.Models.Product>
+
+@{
+    Layout = "~/Views/Shared/UserLayout12.cshtml";
+
+}
+<style>
+    .subCategory:hover, .subCategory:active {
+        border-color: #F28123;
+    }
+    @@media screen and (min-width:900px){
+        #search-input {
+            width: 300px;
+            height: 48px;
+        }
+        #search-button{
+            height:48px;
+        }
+    }
+ 
+   @@media screen and (max-width:900px){
+    #searchBox{
+        flex-direction:column;
+    }
+   }
+    .dropdown-item:hover{
+        color:white;
+        background-color:#F28123;
+    }
+</style>
+
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-filters">
+
+                    @{
+                        Plant_Paradise.Models.PlantsEntities db = new Plant_Paradise.Models.PlantsEntities();
+                        var subcat = db.Sub_Categories.ToList();
+                    }
+                  
+                    <div class="d-flex justify-content-between container flex-xl-nowrap" id="searchBox">
+                        <div class="input-group">
+                            <select onchange="gitproducts()"  id="Subcat"  name="Subcat" class="subCategory dropdown" style="width:30%">
+                                <option class="dropdown-header">Select Category</option>
+                                @foreach (var item in subcat)
+                                {
+                                    <option value="@item.SubCategory_id" class="dropdown-item">@item.SubCategoryName</option>
+                                }
+                            </select>
+                            @using (Html.BeginForm("Index2", "Products"))
+                            {
+                                <button type="submit" style="font-family: 'Poppins', sans-serif; display: inline-block; background-color: #F28123; color: #fff; border-color: none; padding: 10px 20px; border-color: #F28123 ">Reset</button>
+                            }
+                            </div>
+                        <div class="input-group">
+                            <div class="form-outline">
+                                <input id="search-input"  onchange="search()" placeholder="search" class="form-control"  type="search" />
+                            </div>
+                            @using (Html.BeginForm("search", "Products"))
+                            {
+                              <input type="hidden" id="alt" name="Search" />
+                                <button style="font-family: 'Poppins', sans-serif; display: inline-block; background-color: #F28123; color: #fff; border-color: none; padding: 10px 20px; border-color: #F28123" id="search-button" type="submit" class="btn btn-primary" >
+                                    Search
+                                </button>
+                            }
+                            </div>
+                      </div>
+                    
+                    </div>
+            </div>
+        </div>
+
+        <div class="row product-lists">
+
+
+            
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                <div class="col-lg-4 col-md-6 text-center @item.Sub_Categories.Category_id">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <a href="/Products/SingleProduct/@item.Product_id"><img src="~/Images/@item.Product_Image" alt="" style="width:261px;height:336.76px;"></a>
+                        </div>
+                        <h3>@item.Product_Name</h3>
+                        <p class="product-price">@item.Product_Price JD</p>
+                        <a onclick="shoowalert(@item.Product_id)"  class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <p class="d-flex justify-content-center">
+                    <h3 style="text-align:center">Not Found any Item Same The Name</h3>
+                </p>
+            }
+
+
+
+
+
+        </div>
+
+
+    </div>
+</div>
+}
+
+<script>
+    function gitproducts() {
+        var values = document.getElementById("Subcat").value;
+        console.log(values);
+        location.href = "/Products/gitProducts/" + values
+    }
+
+    function search() {
+
+        var name = document.getElementById("search-input").value;
+        document.getElementById("alt").value = name;
+    }
+
+    function shoowalert(id) {
+       alert("The product has been added to cart successfully");
+       call(id);
+    }
+
+    function call(id) {
+        window.location.href = '/Products/Add_ToCart/?id=' + id + '&ReturnUrl=/Index2';
+    }
+</script>
